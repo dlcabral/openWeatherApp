@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "915981854110",
+    "project_id": "myopenweathermap-65902",
+    "storage_bucket": "myopenweathermap-65902.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915981854110:android:3dabae6e32dc321294a28f",
+        "android_client_info": {
+          "package_name": "com.myopenweathermap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915981854110-n8cce6l14h7mte96eprgkfi2ig4s4m3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEy64NQpM2qsy3xSCfYk8iVbz-VetJp14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915981854110-n8cce6l14h7mte96eprgkfi2ig4s4m3s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
