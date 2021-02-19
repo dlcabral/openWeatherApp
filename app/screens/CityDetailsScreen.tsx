@@ -183,7 +183,7 @@ const CityDetailsScreen: FC<Props> = (props)=>{
               const time = new Date(item.item.dt * 1000);
               return (
                 <TouchableOpacity onPress={()=> changeComponent(item.item)} style={styles.viewDay}>
-                  <View style={styles.viewDate}><Text>{time.toDateString().substring(0,9)}</Text></View>
+                  <View style={styles.viewDate}><Text>{time.toDateString().substring(0,10)}</Text></View>
                   <View style={styles.viewMaxMin}>
                     <Text style={styles.textMaxMin}>{parseInt(item.item.temp.max + (-1 * 273.15), 10).toFixed(0)} / {parseInt(item.item.temp.min + (-1 * 273.15), 10).toFixed(0)}°C</Text>
                   </View>
@@ -336,9 +336,9 @@ const styles = StyleSheet.create({
     height: 30,
   },
   viewDate: {
-    width: 70,
+    width: 75,
     marginLeft: 20,
-    marginRight: 140,
+    marginRight: 130,
     justifyContent: 'center',
     alignItems: 'center',
   },
