@@ -3,8 +3,8 @@ import React, {FC, useEffect} from 'react';
 import {View, StyleSheet, Image, Text} from 'react-native';
 
 export interface Props{
-  navigation: ()=> {},
-  route: ()=> {},
+  navigation: any,
+  route: any,
 }
 
 const LoadingImg = require('../assets/loading.png');

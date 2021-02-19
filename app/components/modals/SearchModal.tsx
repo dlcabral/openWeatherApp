@@ -46,7 +46,7 @@ const SearchModal: FC<Props> = (props) => {
           item: json,
         });
 
-        if (citiesArray[0].item.cod == 404){
+        if (parseInt(citiesArray[0].item.cod, 10) === 404){
           Alert.alert(
             search + ' was not found.',
             'Please, make sure this city exists.',
@@ -71,7 +71,7 @@ const SearchModal: FC<Props> = (props) => {
   }, []);
 
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={styles.viewContainer}>
       <View>
         <Modal
           animationType="fade"
@@ -140,6 +140,9 @@ const SearchModal: FC<Props> = (props) => {
 };
 
 const styles = StyleSheet.create({
+  viewContainer: {
+    flexDirection: 'row',
+  },
   viewInformation: {
     flex: 1,
     flexDirection: 'column',

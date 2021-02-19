@@ -11,7 +11,7 @@
       "strict": true,
       "target": "esnext"
     },
-    "files": ["declaration.d.ts"],
+    "files": ["./app/declaration.d.ts"],
     "exclude": [
       "node_modules",
       "babel.config.js",

@@ -4,33 +4,9 @@ import {View, Text, StyleSheet, TouchableOpacity, Image, FlatList, ScrollView } 
 import Icon from 'react-native-vector-icons/EvilIcons';
 import SearchModal from '../components/modals/SearchModal';
 
-interface city{
-  lat: number,
-  lon: number,
-  speed: number,
-  humidity: number,
-  pressure: number,
-  feels_like: string,
-  temp_max: number,
-  temp_min: number,
-}
-
-interface params{
-  city: {
-    [key: string]: city,
-  }
-}
-
-interface navigate{
-}
-
 export interface Props{
-  navigation: {
-    [key: string]: navigate,
-  },
-  route: {
-    [key: string]: params,
-  },
+  navigation: any,
+  route: any,
   closeModal: ()=> {},
   goToCityDetails: ()=> {},
 }
@@ -161,12 +137,12 @@ const CityDetailsScreen: FC<Props> = (props)=>{
         <Image source={{uri:`http://openweathermap.org/img/w/${props.route.params.city.weather[0].icon}.png`}} style={styles.logo} />
         <Text>{props.route.params.city.weather[0].description}</Text>
       </View>
-      <Text style={styles.textTemperature}>{parseInt(props.route.params.city.main.temp + (-1 * 273.15)).toFixed(0)}°C</Text>
-      <Text style={styles.textFeelsLike}>Feels like {parseInt(props.route.params.city.main.feels_like + (-1 * 273.15)).toFixed(0)}°C</Text>
+      <Text style={styles.textTemperature}>{parseInt(props.route.params.city.main.temp + (-1 * 273.15), 10).toFixed(0)}°C</Text>
+      <Text style={styles.textFeelsLike}>Feels like {parseInt(props.route.params.city.main.feels_like + (-1 * 273.15), 10).toFixed(0)}°C</Text>
 
       <View style={styles.viewMinMax}>
-        <Text>Min {parseInt(props.route.params.city.main.temp_min + (-1 * 273.15)).toFixed(0)}°C    </Text>
-        <Text>Max {parseInt(props.route.params.city.main.temp_max + (-1 * 273.15)).toFixed(0)}°C</Text>
+        <Text>Min {parseInt(props.route.params.city.main.temp_min + (-1 * 273.15), 10).toFixed(0)}°C    </Text>
+        <Text>Max {parseInt(props.route.params.city.main.temp_max + (-1 * 273.15), 10).toFixed(0)}°C</Text>
       </View>
       <View style={styles.viewWeather}>
         <View style={styles.viewRow1}>
@@ -175,9 +151,9 @@ const CityDetailsScreen: FC<Props> = (props)=>{
           <View style={styles.viewField1}><Text style={styles.textField}>UV index: {weatherData.uvIndex}</Text></View>
         </View>
         <View style={styles.viewRow2}>
-          <View style={styles.viewField1}><Text style={styles.textField}>Pressure: {parseInt(weatherData.pressure / 33.86).toFixed(2)}inHg</Text></View>
+          <View style={styles.viewField1}><Text style={styles.textField}>Pressure: {(weatherData.pressure / 33.86).toFixed(2)}inHg</Text></View>
           <View style={styles.viewField1}><Text style={styles.textField}>Visibility: {weatherData.visibility / 1000}km</Text></View>
-          <View style={styles.viewField1}><Text style={styles.textField}>Dew Point: {parseInt(weatherData.dewPoint + (-1 * 273.15)).toFixed(0)}°C</Text></View>
+          <View style={styles.viewField1}><Text style={styles.textField}>Dew Point: {Math.floor(weatherData.dewPoint + (-1 * 273.15))}°C</Text></View>
         </View>
       </View>
       <View style={styles.viewHourlyWeather}>
@@ -191,7 +167,7 @@ const CityDetailsScreen: FC<Props> = (props)=>{
               <View style={styles.viewHour}>
                 <Text>{time.getHours()}{time.getHours() >= 12 ? 'pm' : 'am'}</Text>
                 <Image source={{uri:`http://openweathermap.org/img/w/${item.item.weather[0].icon}.png`}} style={styles.miniLogo} />
-                <Text>{parseInt(item.item.temp + (-1 * 273.15)).toFixed(0)}°C</Text>
+                <Text>{parseInt(item.item.temp + (-1 * 273.15), 10).toFixed(0)}°C</Text>
               </View>
             );
           }}
@@ -209,7 +185,7 @@ const CityDetailsScreen: FC<Props> = (props)=>{
                 <TouchableOpacity onPress={()=> changeComponent(item.item)} style={styles.viewDay}>
                   <View style={styles.viewDate}><Text>{time.toDateString().substring(0,9)}</Text></View>
                   <View style={styles.viewMaxMin}>
-                    <Text style={styles.textMaxMin}>{parseInt(item.item.temp.max + (-1 * 273.15)).toFixed(0)} / {parseInt(item.item.temp.min + (-1 * 273.15)).toFixed(0)}°C</Text>
+                    <Text style={styles.textMaxMin}>{parseInt(item.item.temp.max + (-1 * 273.15), 10).toFixed(0)} / {parseInt(item.item.temp.min + (-1 * 273.15), 10).toFixed(0)}°C</Text>
                   </View>
                   <Image source={{uri:`http://openweathermap.org/img/w/${item.item.weather[0].icon}.png`}} style={styles.miniLogo} />
                 </TouchableOpacity>
@@ -220,8 +196,8 @@ const CityDetailsScreen: FC<Props> = (props)=>{
         </View> :
         <ScrollView style={styles.viewWeatherInformation}>
           <View style={styles.viewTopDayWeather}>
-            <View><Text style={{fontWeight: 'bold'}}>{dayWeather.description}</Text></View>
-            <Text style={styles.textMaxMin}>{parseInt(dayWeather.max + (-1 * 273.15)).toFixed(0)} / {parseInt(dayWeather.min + (-1 * 273.15)).toFixed(0)}°C</Text>
+            <View><Text style={styles.textDescription}>{dayWeather.description}</Text></View>
+            <Text style={styles.textMaxMin}>{Math.floor(dayWeather.max + (-1 * 273.15))} / {Math.floor(dayWeather.min + (-1 * 273.15))}°C</Text>
             <Image source={{uri:`http://openweathermap.org/img/w/${dayWeather.icon}.png`}} style={styles.miniLogo} />
             <TouchableOpacity onPress={()=> changeComponent(dayWeather)} style={styles.viewDay}>
               <Icon name="navicon" size={25} color="black" />
@@ -238,7 +214,7 @@ const CityDetailsScreen: FC<Props> = (props)=>{
             </View>
             <View style={styles.viewData}>
               <View style={styles.viewDayLabels}><Text>Pressure</Text></View>
-              <Text>{parseInt(dayWeather.pressure / 33.86).toFixed(2)}inHg</Text>
+              <Text>{(dayWeather.pressure / 33.86).toFixed(2)}inHg</Text>
             </View>
             <View style={styles.viewData}>
               <View style={styles.viewDayLabels}><Text>Humidity</Text></View>
@@ -400,6 +376,9 @@ const styles = StyleSheet.create({
   },
   viewDayLabels: {
     width: 250,
+  },
+  textDescription: {
+    fontWeight: 'bold',
   },
 });
 

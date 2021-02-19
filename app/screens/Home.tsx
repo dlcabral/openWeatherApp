@@ -1,21 +1,14 @@
 /* eslint-disable prettier/prettier */
 import React, {FC, useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Dimensions, Alert} from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import ModalCities from '../components/modals/CitiesModal';
 
 const { width } = Dimensions.get('window');
 let cities = [];
 
-interface navigate{
-  screen: string,
-  params: any,
-}
-
 export interface Props{
-  navigation: {
-    [key: string]: navigate,
-  },
+  navigation: any,
   closeModal: ()=> {},
   goToCityDetails: ()=> {},
 }
@@ -104,9 +97,9 @@ const Home: FC<Props> = (props)=>{
             longitudeDelta: 0.05,
           }}
           onPress={(event) => onMapPress(event)}
-          style={{width: '100%', height: '100%'}}>
+          style={styles.viewMap}>
             {marker.map(markerObj => (
-              <MapView.Marker
+              <Marker
                 key={markerObj.key}
                 coordinate={markerObj.coordinate}
               />
@@ -140,6 +133,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Arial',
     textAlign: 'center',
+  },
+  viewMap: {
+    width: '100%',
+    height: '100%',
   },
 });
 
